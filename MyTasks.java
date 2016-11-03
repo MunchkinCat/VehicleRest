@@ -23,52 +23,54 @@ public class MyTasks {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    @Scheduled(cron = "* * * 10 * *")
-    //@Scheduled(fixedRate = 50)
-    public void addVehicle() {
-        int id = greatestVehicle()+1;
-        int randomVyear = randVehicleYr();
-        int randRetailPrice =randRetail();
-        String randLetter = randAlphaNumeric();
-        String url = "http://localhost:8080/addVehicle";
+//    @Scheduled(cron = "*/1 * * * * *")
+//    @Scheduled(fixedRate = 50)
+//    public void addVehicle() {
+//        int id = greatestVehicle()+1;
+//        int randomVyear = randVehicleYr();
+//        int randRetailPrice =randRetail();
+//        String randLetter = randAlphaNumeric();
+//        String url = "http://localhost:8080/addVehicle";
+//
+//        Vehicle testVehicle = new Vehicle(id,randLetter,randomVyear,randRetailPrice);
+//        restTemplate.postForObject(url,testVehicle,Vehicle.class);
+//        System.out.println("created" +testVehicle.getId());                        //Test
+//
+//            }
 
-        Vehicle testVehicle = new Vehicle(id,randLetter,randomVyear,randRetailPrice);
-        restTemplate.postForObject(url,testVehicle,Vehicle.class);
-        System.out.println(testVehicle.getId());                        //Test
+//    @Scheduled(cron = "* * * 3 * * ")
+//    public void getVehicle() {
+//        int randOneHundred1 = randOneHundred();
+//        int finalNumber = randOneHundred1;
+//        String url = "http://localhost:8080/getVehicle/"+ finalNumber;  //This will get vehicle between 1-100
+//        Vehicle fillVehicle = restTemplate.getForObject(url, Vehicle.class);
+//        System.out.println("got" + fillVehicle);                                        //Test
+//
+//    }
 
-            }
-
-    @Scheduled(cron = "*/3 * * * * * ")
-    public void getVehicle() {
-        int randOneHundred1 = randOneHundred();
-        int finalNumber = randOneHundred1;
-        String url = "http://localhost:8080/getVehicle/"+ finalNumber;  //This will get vehicle between 1-100
-        Vehicle fillVehicle = restTemplate.getForObject(url, Vehicle.class);
-        System.out.println(fillVehicle);                                        //Test
-
-    }
-
-//    @Scheduled(cron = "*/50 * * * * *")
+//    @Scheduled(cron = "* * 3 * * *")
 //    public void deleteVehicle(){
 //    int randOneHundred1 = randOneHundred();
-//        String url = "http://localhost:8080/deleteVehicle/" + randOneHundred1;
+//    int randOneHundredFinal = randOneHundred1;
+//        String url = "http://localhost:8080/deleteVehicle/" +randOneHundredFinal;
 //        restTemplate.delete(url);
+//        System.out.println("deleted"+ randOneHundredFinal);
 //                                                                        //Will return null as test
 //    }
 
 
-//    @Scheduled(cron = "*/5 * * * * *")
-//        public void updateVehicle(){
-//        int randOneHundred1 = randOneHundred();
-//        int finalRandomHundred1 = randOneHundred1;
-//        String url = "http://localhost:8080/updateVehicle";
-//        Vehicle updateVehicle = new Vehicle(finalRandomHundred1,"1111",1111,11111);  // Fix this
-//        restTemplate.put(url, updateVehicle );
+    @Scheduled(cron = "*/1 * * * * *")
+        public void updateVehicle(){
+        int randOneHundred1 = randOneHundred();
+        int finalRandomHundred1 = randOneHundred1;
+        String url = "http://localhost:8080/updateVehicle";
+        Vehicle updateVehicle = new Vehicle(finalRandomHundred1,"1111",1111,11111);  // Fix this
+        restTemplate.put(url, updateVehicle );
 //        String getUrl = "http://localhost:8080/getVehicle/"+finalRandomHundred1;
 //        Vehicle mrUpdateVehicle = restTemplate.getForObject(getUrl,Vehicle.class);
-//        System.out.println(mrUpdateVehicle);
-//
-//    }
+//        System.out.println("updated" + mrUpdateVehicle);
+
+    }
 
 
 public int greatestVehicle() {
@@ -116,7 +118,7 @@ public String randAlphaNumeric(){
 public int randOneHundred(){
     int randOneHundred1;
     Random random = new Random();
-    randOneHundred1 = random.nextInt(100-1+1)+ 1;
+    randOneHundred1 = random.nextInt(100-2+2)+ 2;
     return randOneHundred1;
 }
 
