@@ -44,26 +44,27 @@ public class Controller {
         File file = new File ("/Users/Gabe/Desktop/inventory.txt");
         LineIterator it = FileUtils.lineIterator(file, CharEncoding.UTF_8);
         ObjectMapper mapper = new ObjectMapper();
-        try {
+
             while (it.hasNext()) {
                 String line = it.nextLine();
 
                 Vehicle vehicle = mapper.readValue(line, Vehicle.class);
-                 if (vehicle.getId()== id){
+                 if(vehicle.getId()== id){
+                     System.out.println(line);
                      return vehicle;
                  }else{
-                     System.out.println("Vehicle not found.");
+                     //Empty loop to facilitate single get method.
                  }
 
-            System.out.println(line);
 
+                 }
+        LineIterator.closeQuietly(it);
+        return null; //System.out.println("Vehicle not found.");
 
             }
-        } finally {
-            LineIterator.closeQuietly(it);
-        }
-        return null;
-    }
+
+
+
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -75,24 +76,23 @@ public class Controller {
         LineIterator updateVehicleIterator= FileUtils.lineIterator(updateVehicleUrl);
         ObjectMapper mapper = new ObjectMapper();   // main mapper
 
-        try {
+
 
             while (updateVehicleIterator.hasNext()) {       //iterate through while there are still lines
                 String line = updateVehicleIterator.nextLine(); //saved as string in line
                 Vehicle vehicleUpdate = mapper.readValue(line,Vehicle.class);
                 if (newVehicle.getId() == vehicleUpdate.getId()){
 
-                    FileUtils.writeStringToFile(updateVehicleUrl, "", CharEncoding.UTF_8);
+                    //FileUtils.writeStringToFile(updateVehicleUrl, "", CharEncoding.UTF_8);
                     mapper.writeValue(updateVehicleUrl, newVehicle);
-
+                return null;
                 } else {
-                    System.out.println("ID invalid or not found.");
+                    //yay
                 }
             }
-        } finally {
+
             LineIterator.closeQuietly(updateVehicleIterator);
-        }
-        return null;
+         return null;
     }
 
 

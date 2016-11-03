@@ -23,7 +23,8 @@ public class MyTasks {
 
     RestTemplate restTemplate = new RestTemplate();
 
-    @Scheduled(cron = "*/1 * * * * *")
+    @Scheduled(cron = "* * * 10 * *")
+    //@Scheduled(fixedRate = 50)
     public void addVehicle() {
         int id = greatestVehicle()+1;
         int randomVyear = randVehicleYr();
@@ -34,36 +35,40 @@ public class MyTasks {
         Vehicle testVehicle = new Vehicle(id,randLetter,randomVyear,randRetailPrice);
         restTemplate.postForObject(url,testVehicle,Vehicle.class);
         System.out.println(testVehicle.getId());                        //Test
+
             }
 
-    @Scheduled(cron = "*/5 * * * * * ")
+    @Scheduled(cron = "*/3 * * * * * ")
     public void getVehicle() {
         int randOneHundred1 = randOneHundred();
-        String url = "http://localhost:8080/getVehicle/"+ randOneHundred1;  //This will get vehicle between 1-100
+        int finalNumber = randOneHundred1;
+        String url = "http://localhost:8080/getVehicle/"+ finalNumber;  //This will get vehicle between 1-100
         Vehicle fillVehicle = restTemplate.getForObject(url, Vehicle.class);
         System.out.println(fillVehicle);                                        //Test
 
     }
 
-    @Scheduled(cron = "*/50 * * * * *")
-    public void deleteVehicle(){
-    int randOneHundred1 = randOneHundred();
-        String url = "http://localhost:8080/deleteVehicle/" + randOneHundred1;
-        restTemplate.delete(url);
-                                                                        //Will return null as test
-    }
+//    @Scheduled(cron = "*/50 * * * * *")
+//    public void deleteVehicle(){
+//    int randOneHundred1 = randOneHundred();
+//        String url = "http://localhost:8080/deleteVehicle/" + randOneHundred1;
+//        restTemplate.delete(url);
+//                                                                        //Will return null as test
+//    }
 
 
-    @Scheduled(cron = "*/15 * * * * *")
-    public void updateVehicle(){
-        int randOneHundred1 = randOneHundred();
-        String url = "http://localhost:8080/updateVehicle";
-        Vehicle updateVehicle = new Vehicle(randOneHundred1,"f250",2000,20000);
-        restTemplate.put(url, updateVehicle );
-        Vehicle mrUpdateVehicle = restTemplate.getForObject(url,Vehicle.class);
-        System.out.println(mrUpdateVehicle);
-
-    }
+//    @Scheduled(cron = "*/5 * * * * *")
+//        public void updateVehicle(){
+//        int randOneHundred1 = randOneHundred();
+//        int finalRandomHundred1 = randOneHundred1;
+//        String url = "http://localhost:8080/updateVehicle";
+//        Vehicle updateVehicle = new Vehicle(finalRandomHundred1,"1111",1111,11111);  // Fix this
+//        restTemplate.put(url, updateVehicle );
+//        String getUrl = "http://localhost:8080/getVehicle/"+finalRandomHundred1;
+//        Vehicle mrUpdateVehicle = restTemplate.getForObject(getUrl,Vehicle.class);
+//        System.out.println(mrUpdateVehicle);
+//
+//    }
 
 
 public int greatestVehicle() {
@@ -109,7 +114,7 @@ public String randAlphaNumeric(){
 }
 
 public int randOneHundred(){
-    int randOneHundred1 = 2;
+    int randOneHundred1;
     Random random = new Random();
     randOneHundred1 = random.nextInt(100-1+1)+ 1;
     return randOneHundred1;
