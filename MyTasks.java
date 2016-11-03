@@ -24,7 +24,7 @@ public class MyTasks {
     RestTemplate restTemplate = new RestTemplate();
 
     @Scheduled(cron = "*/1 * * * * *")
-    @Scheduled(fixedRate = 50)
+    //@Scheduled(fixedRate = 50)            //populate list quickly
     public void addVehicle() {
         int id = greatestVehicle()+1;
         int randomVyear = randVehicleYr();
@@ -38,7 +38,7 @@ public class MyTasks {
 
             }
 
-    @Scheduled(cron = "* * * 3 * * ")
+    @Scheduled(cron = "*/5 * * * * * ")
     public void getVehicle() {
         int randOneHundred1 = randOneHundred();
         int finalNumber = randOneHundred1;
@@ -48,7 +48,7 @@ public class MyTasks {
 
     }
 
-    @Scheduled(cron = "* * 3 * * *")
+    @Scheduled(cron = "*/30 * * * * *")
     public void deleteVehicle(){
     int randOneHundred1 = randOneHundred();
     int randOneHundredFinal = randOneHundred1;
@@ -59,7 +59,7 @@ public class MyTasks {
     }
 
 
-    @Scheduled(cron = "*/1 * * * * *")
+    @Scheduled(cron = "*/5 * * * * *")
         public void updateVehicle(){
         int randOneHundred1 = randOneHundred();
         int finalRandomHundred1 = randOneHundred1;
