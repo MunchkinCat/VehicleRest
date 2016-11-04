@@ -48,7 +48,7 @@ public class MyTasks {
 
     }
 
-    @Scheduled(cron = "*/30 * * * * *")
+    @Scheduled(cron = "*/10 * * * * *")
     public void deleteVehicle(){
     int randOneHundred1 = randOneHundred();
     int randOneHundredFinal = randOneHundred1;
