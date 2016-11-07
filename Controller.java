@@ -50,26 +50,23 @@ public class Controller {
         LineIterator it = FileUtils.lineIterator(file, UTF_8);
         ObjectMapper mapper = new ObjectMapper();
 
-            while (it.hasNext()) {
-                String line = it.nextLine();
+        while (it.hasNext()) {
+            String line = it.nextLine();
 
-                Vehicle vehicle = mapper.readValue(line, Vehicle.class);
-                 if(vehicle.getId()== id){
-                     System.out.println(line);
-                     return vehicle;
-                 }else{
-                     //Empty loop to facilitate single get method.
-                 }
-
-
-                 }
-        LineIterator.closeQuietly(it);
-        return null; //System.out.println("Vehicle not found.");
-
+            Vehicle vehicle = mapper.readValue(line, Vehicle.class);
+            if(vehicle.getId()== id){
+                System.out.println(line);
+                return vehicle;
+            }else{
+                //Empty loop to facilitate single get method.
             }
 
 
+        }
+        LineIterator.closeQuietly(it);
+        return null; //System.out.println("Vehicle not found.");
 
+    }
 
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,43 +106,7 @@ public class Controller {
         return newVehicle;
     }
 
-
-
-    //                                              IGNORE                                              //
-
-
-
-
-//        File updateVehicleUrl = new File ("/Users/Gabe/Desktop/inventory.txt");
-//        LineIterator updateVehicleIterator= FileUtils.lineIterator(updateVehicleUrl);
-//        ObjectMapper mapper = new ObjectMapper();   // main mapper
-//
-//
-//
-//            while (updateVehicleIterator.hasNext()) {       //iterate through while there are still lines
-//                String line = updateVehicleIterator.nextLine(); //saved as string in line
-//                Vehicle vehicleUpdate = mapper.readValue(line,Vehicle.class);
-//                if (newVehicle.getId() == vehicleUpdate.getId()){
-//
-//                    //FileUtils.writeStringToFile(updateVehicleUrl, "", CharEncoding.UTF_8);
-//                    mapper.writeValue(updateVehicleUrl, newVehicle);
-//                return null;
-//                } else {
-//                    //yay
-//                }
-//            }
-//
-//            LineIterator.closeQuietly(updateVehicleIterator);
-//         return null;
- //   }
-
-
-
-
-
-    //                                          IGNORE ABOVE                                    //
-    ///////////////////////////////////////////////////////////////////////////////////////////////////////
-
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     @RequestMapping(value = "/deleteVehicle/{id}", method = RequestMethod.DELETE)
     public ResponseEntity<String> deleteVehicle(@PathVariable("id") int id) throws IOException {
@@ -184,53 +145,4 @@ public class Controller {
 
 
 
-//                                      IGNORE                                  //
-
-
-
-    //ResponseEntity<String> responseEntity = new ResponseEntity<>("Vehicle successfully deleted", HttpStatus.OK);
-        //return responseEntity;}}
-
-
-//        File filetoDeleteFrom = new File("/Users/Gabe/Desktop/inventory.txt");
-//        ObjectMapper mapper = new ObjectMapper();
-//        ArrayList<String> list = new ArrayList<>();
-//        String[] lines = StringUtils.split("\r\n");
-//        for(int i=0; i<lines.length; i++)
-//            Vehicle car1 = mapper.ReadValue(lines[i],Vehicle.class);
-//        if(cars.get(i).getId() == id)
-//
-//
-//        String str = FileUtils.readFileToString(filetoDeleteFrom, "UTF-8");
-//        String file = "/Users/Gabe/Desktop/inventory.txt";
-//
-//        LineIterator deleteIterator = FileUtils.lineIterator(filetoDeleteFrom, "UTF-8");
-//        ObjectMapper deleteMapper = new ObjectMapper();
-//
-//            while (deleteIterator.hasNext()) {
-//                String line = deleteIterator.nextLine();
-//                Vehicle deleteVehicle = deleteMapper.readValue(line, Vehicle.class);
-//                if (deleteVehicle.getId() == id) {
-//
-//                    int lineNumber = deleteVehicle.getId();
-//                    int lineToBeEdited = lineNumber;
-//                    System.out.println(lineToBeEdited);
-//                    ChangeLineInFile changeFile = new ChangeLineInFile();
-//                 changeFile.changeALineInATextFile(file, "", lineToBeEdited);
-//
-//                    JFileChooser chooser = new JFileChooser();
-//
-//
-//
-//                    //FileWriter deleteAppend = new FileWriter(filetoDeleteFrom,true);
-//                    //deleteAppend.write("THINGS ARE NOT HAPPENING");
-//                    // FileUtils.writeStringToFile(filetoDeleteFrom, "", "UTF-8");//CharEncoding.UTF_8);
-//                }
-//            }
-//
-//            LineIterator.closeQuietly(deleteIterator);
-//            return null;
-//        }
-//
-//        }
 
